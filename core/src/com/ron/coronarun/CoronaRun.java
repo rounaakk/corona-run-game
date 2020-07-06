@@ -35,11 +35,11 @@ public class CoronaRun extends ApplicationAdapter {
 	Texture coin;
 	int coinCount;
 
-	ArrayList<Integer> bombXs = new ArrayList<Integer>();
-	ArrayList<Integer> bombYs = new ArrayList<Integer>();
-	ArrayList<Rectangle> bombRectangles =  new ArrayList<Rectangle>();
-	Texture bomb;
-	int bombCount;
+	ArrayList<Integer> coronaXs = new ArrayList<Integer>();
+	ArrayList<Integer> coronaYs = new ArrayList<Integer>();
+	ArrayList<Rectangle> coronaRectangles =  new ArrayList<Rectangle>();
+	Texture corona;
+	int coronaCount;
 
 
 	@Override
@@ -55,7 +55,7 @@ public class CoronaRun extends ApplicationAdapter {
 		manY = Gdx.graphics.getHeight() / 2;
 
 		coin = new Texture("coin.png");
-		bomb = new Texture("corona.png");
+		corona = new Texture("corona.png");
 		random = new Random();
 
 		dizzy = new Texture("dizzy-1.png");
@@ -71,10 +71,10 @@ public class CoronaRun extends ApplicationAdapter {
 		coinXs.add(Gdx.graphics.getWidth());
 	}
 
-	public void makeBomb() {
+	public void makecorona() {
 		float height = random.nextFloat() * Gdx.graphics.getHeight();
-		bombYs.add((int)height);
-		bombXs.add(Gdx.graphics.getWidth());
+		coronaYs.add((int)height);
+		coronaXs.add(Gdx.graphics.getWidth());
 	}
 
 	@Override
@@ -84,19 +84,19 @@ public class CoronaRun extends ApplicationAdapter {
 
 		if (gameState == 1) {
 			// GAME IS LIVE
-			// BOMB
-			if (bombCount < 250) {
-				bombCount++;
+			// corona
+			if (coronaCount < 250) {
+				coronaCount++;
 			} else {
-				bombCount = 0;
-				makeBomb();
+				coronaCount = 0;
+				makecorona();
 			}
 
-			bombRectangles.clear();
-			for (int i=0;i < bombXs.size();i++) {
-				batch.draw(bomb, bombXs.get(i), bombYs.get(i));
-				bombXs.set(i, bombXs.get(i) - 8);
-				bombRectangles.add(new Rectangle(bombXs.get(i), bombYs.get(i), bomb.getWidth(), bomb.getHeight()));
+			coronaRectangles.clear();
+			for (int i=0;i < coronaXs.size();i++) {
+				batch.draw(corona, coronaXs.get(i), coronaYs.get(i));
+				coronaXs.set(i, coronaXs.get(i) - 8);
+				coronaRectangles.add(new Rectangle(coronaXs.get(i), coronaYs.get(i), corona.getWidth(), corona.getHeight()));
 			}
 
 			// COINS
@@ -151,10 +151,10 @@ public class CoronaRun extends ApplicationAdapter {
 				coinYs.clear();
 				coinRectangles.clear();
 				coinCount = 0;
-				bombXs.clear();
-				bombYs.clear();
-				bombRectangles.clear();
-				bombCount = 0;
+				coronaXs.clear();
+				coronaYs.clear();
+				coronaRectangles.clear();
+				coronaCount = 0;
 			}
 		}
 
@@ -176,9 +176,9 @@ public class CoronaRun extends ApplicationAdapter {
 			}
 		}
 
-		for (int i=0; i < bombRectangles.size();i++) {
-			if (Intersector.overlaps(manRectangle, bombRectangles.get(i))) {
-				Gdx.app.log("Bomb!", "Collision!");
+		for (int i=0; i < coronaRectangles.size();i++) {
+			if (Intersector.overlaps(manRectangle, coronaRectangles.get(i))) {
+				Gdx.app.log("corona!", "Collision!");
 				gameState = 2;
 			}
 		}
